@@ -1,8 +1,73 @@
 -- A script to record and display 802.11 beacon RSSI on different channels
 
-local beacons = {}
-local tap = Listener.new()
+local table = require("table")
+local filter = 'wlan.fc.subtype == 8'
 
-function tap.packet(pinfo, tvb)
-    print("Got a packet")
+local ssid_f = Field.new("wlan_mgt.ssid")
+local channel_f = Field.new("wlan_radio.channel")
+local dbm_f = Field.new("wlan_radio.signal_dbm")
+local bssid_f = Field.new("wlan.bssid")
+local frequency_f = Field.new("wlan_radio.frequency")
+
+Point = {}
+
+function Point:new(bssid, ssid, dbm, channel, frequency)
+	obj = {
+		channel = tostring(channel),
+		ssid = tostring(ssid),
+		dbm = tostring(dbm),
+		bssid = tostring(bssid),
+		frequency = tostring(frequency)
+	}
+	self.__index = self
+	return setmetatable(obj, self)
 end
+
+function Point:__tostring()
+	return self.bssid .. "\t" ..
+		self.ssid .. "\t" ..
+		self.channel .. "\t" ..
+		self.dbm .. "\t" ..
+		self.frequency .. "\n"
+end
+
+local function record_beacons()
+	local beacons = {}
+	local tw = TextWindow.new("Beacon Record")
+	local tap = Listener.new("radiotap", filter)
+
+	set_filter(filter)
+	apply_filter()
+
+	function remove()
+		tap:remove()
+	end
+
+	tw:set_atclose(remove)
+
+	function tap.packet(pinfo, tvb, userdata)
+		local ssid = ssid_f()
+		local channel = channel_f()
+		local dbm = dbm_f()
+		local bssid = bssid_f()
+		local frequency = frequency_f()
+
+		-- Add to GUI log
+		table.insert(beacons, Point:new(bssid, ssid, dbm, channel, frequency))
+	end
+
+	function tap.draw(t)
+		tw:clear()
+		tw:append("BSSID\tSSID\tChannel\tdbm\n")
+		for key, b in pairs(beacons) do
+			tw:append(tostring(b))
+		end
+	end
+
+	function tap.reset()
+		tw:clear()
+		beacons = {}
+	end
+end
+
+register_menu("Record Beacons", record_beacons, MENU_TOOLS_UNSORTED)

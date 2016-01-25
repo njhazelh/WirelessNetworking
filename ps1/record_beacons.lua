@@ -25,22 +25,24 @@ end
 
 function Point:__tostring()
 	return self.bssid .. "\t" ..
-		self.ssid .. "\t" ..
 		self.channel .. "\t" ..
 		self.dbm .. "\t" ..
-		self.frequency .. "\n"
+		self.frequency .. "\t" ..
+		self.ssid .. "\n"
 end
 
 local function record_beacons()
 	local beacons = {}
 	local tw = TextWindow.new("Beacon Record")
 	local tap = Listener.new("radiotap", filter)
+	local file = io.open("beacon_record.csv", "w")
 
 	set_filter(filter)
 	apply_filter()
 
 	function remove()
 		tap:remove()
+		file.close()
 	end
 
 	tw:set_atclose(remove)
@@ -52,8 +54,12 @@ local function record_beacons()
 		local bssid = bssid_f()
 		local frequency = frequency_f()
 
+		local p = Point:new(bssid, ssid, dbm, channel, frequency)
+
 		-- Add to GUI log
-		table.insert(beacons, Point:new(bssid, ssid, dbm, channel, frequency))
+		table.insert(beacons, p)
+
+		file:write(tostring(p))
 	end
 
 	function tap.draw(t)

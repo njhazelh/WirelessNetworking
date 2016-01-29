@@ -8,7 +8,9 @@ Beacon = collections.namedtuple("Beacon", "bssid channel dbm freq ssid")
 
 
 def split_line(line):
-    parts = line.split("\t")
+    parts = line.strip().split("\t")
+    if len(parts) != 5 or "" in parts or "nil" in parts:
+        return None
     return Beacon(bssid=parts[0],
                   channel=parts[1],
                   dbm=parts[2],
@@ -17,8 +19,13 @@ def split_line(line):
 
 
 def read_lines():
-    return (split_line(line) for line in sys.stdin.readlines())
-
+    beacons = []
+    for line in sys.stdin.readlines():
+        b = split_line(line)
+        if b is None:
+            continue
+        beacons.append(b)
+    return beacons
 
 def reduce_lines(beacons):
     info = {}
@@ -43,6 +50,7 @@ def reduce_lines(beacons):
 
 
 def make_chart(info):
+    info = sorted(info, key=lambda x: int(x.channel))
     for n in info:
         print(n)
 

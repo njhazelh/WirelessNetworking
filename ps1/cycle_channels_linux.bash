@@ -22,7 +22,7 @@ function main() {
 
     while true
     do
-        for c in $(iwlist $interface channel | grep -o "Channel [[:digit:]]* :" | awk '{print $2}')
+        for c in $(iwlist "$interface" channel | grep -o "Channel [[:digit:]]* :" | awk '{print $2}')
         do
             cycle "$interface" $c
         done

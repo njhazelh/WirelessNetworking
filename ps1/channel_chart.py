@@ -56,6 +56,8 @@ def make_chart(info):
     data = np.array([(b.channel, b.dbm) for b in info])
     plt.figure(figsize=(15, 10), dpi=100)
     plt.title("2.4Ghz Access Points")
+    plt.xlabel("Channel Number")
+    plt.ylabel("Dbm")
     plt.rc('font', family='arial', weight='normal', size=8)
     labels = [b.ssid for b in info]
     plt.subplots_adjust(bottom=0.1)

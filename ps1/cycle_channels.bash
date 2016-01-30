@@ -8,7 +8,7 @@ function cycle() {
     echo "starting channel $channel"
     airport "$interface" sniff "$channel" >/dev/null 2>/dev/null &
     local pid=$!
-    sleep 0.2 # 200ms
+    sleep 0.05 # 200ms
     echo "killing channel $channel"
     kill -9 "$pid" >/dev/null 2>/dev/null
     wait "$pid" 2>/dev/null

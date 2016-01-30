@@ -5,14 +5,13 @@ export PATH="$PATH:/System/Library/PrivateFrameworks/Apple80211.framework/Versio
 function cycle() {
     local interface=$1
     local channel=$2
-    echo "starting channel $channel"
+    echo -en "\rrunning on channel $channel "
     airport "$interface" sniff "$channel" >/dev/null 2>/dev/null &
     local pid=$!
-    sleep 0.2 # 200ms
-    echo "killing channel $channel"
+    sleep 0.1 # 100ms
     kill -9 "$pid" >/dev/null 2>/dev/null
     wait "$pid" 2>/dev/null
-    rm /tmp/airportSniff*.cap
+    rm /tmp/airportSniff*.cap 2>/dev/null >/dev/null
 }
 
 function main() {

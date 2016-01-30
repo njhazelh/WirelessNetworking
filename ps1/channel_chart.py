@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import matplotlib
+import matplotlib.pyplot as plt
 import sys
 import collections
 import numpy as np
@@ -28,6 +28,7 @@ def read_lines():
         beacons.append(b)
     return beacons
 
+
 def reduce_lines(beacons):
     info = {}
     for b in beacons:
@@ -52,36 +53,24 @@ def reduce_lines(beacons):
 
 def make_chart(info):
     info = sorted(info, key=lambda x: int(x.channel))
-    for n in info:
-        print(n)
-    data = np.array([b.channel for b in info])
-    N = len(data)
-    labels = ['point{0}'.format(i) for i in range(N)]
-    plt.subplots_adjust(bottom = 0.1)
+    data = np.array([(b.channel, b.dbm) for b in info])
+    plt.figure(figsize=(15, 10), dpi=100)
+    plt.title("2.4Ghz Access Points")
+    plt.rc('font', family='arial', weight='normal', size=8)
+    labels = [b.ssid for b in info]
+    plt.subplots_adjust(bottom=0.1)
     plt.scatter(
-        data[:, 0], data[:, 1], marker = 'o', c = data[:, 2], s = data[:, 3]*1500,
-        cmap = plt.get_cmap('Spectral'))
+        data[:, 0], data[:, 1], marker='o', cmap=plt.get_cmap('Spectral'))
     for label, x, y in zip(labels, data[:, 0], data[:, 1]):
-        plt.annotate(
-            label,
-            xy = (x, y), xytext = (-20, 20),
-            textcoords = 'offset points', ha = 'right', va = 'bottom',
-            bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),
-            arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
-
-    plt.show()
-
-
-
-def save_chart(chart):
-    pass
+        plt.annotate(label, xy=(x, y), xytext=(-5, -5),
+                     textcoords='offset points', ha='right', va='bottom')
+    plt.savefig("channels.png")
 
 
 def main():
     beacons = read_lines()
     info = reduce_lines(beacons)
     chart = make_chart(info)
-    save_chart(chart)
 
 
 if __name__ == "__main__":

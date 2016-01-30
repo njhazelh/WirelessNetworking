@@ -79,6 +79,9 @@ local function packet_rate()
 	function tap.reset()
 		tw:clear()
 		beacons = {}
+		if tonumber(time) - start_time >= 1 then 
+			start_time = tonumber(time)
+		end
 	end
 end
 

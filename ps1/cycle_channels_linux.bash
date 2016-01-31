@@ -7,7 +7,7 @@ function cycle() {
     local channel=$2
     echo -en "\rrunning on channel $channel "
     iwconfig "$interface" channel "$channel" >/dev/null
-    sleep 0.1 # 100ms
+    sleep 0.05 # 50ms
     wait "$pid" 2>/dev/null
 }
 
@@ -15,9 +15,14 @@ function main() {
     local interface=$1
     local c
 
+    if [ "$(id -u)" != "0" ]; then
+        echo "This script must be run as root" 1>&2
+        exit 1
+    fi
+
     while true
     do
-        for c in $(seq 1 13)
+        for c in $(iwlist "$interface" channel | grep -o "Channel [[:digit:]]* :" | awk '{print $2}')
         do
             cycle "$interface" $c
         done

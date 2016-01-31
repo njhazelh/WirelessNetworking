@@ -13,17 +13,19 @@ for me to be able to track my progress. First, take a look at the output of
 listen_all_rooms.lua (the same script from problem 1, run the same way) in the 
 file all_rooms_record.csv. Here is a diagram of where I went:
 
-* = access point SSID; all APs other than kotuby in other buildings
+@ = access point SSID; all APs other than kotuby in other buildings
 R = room
- N
-W E                +----+
- S     +----+      | R0 |    +----+
-       | R1 |   |---, --+----| R3 |
-       +-, -+---| ___________,----+                   *patnetwork1   
-*kotuby  |________| 
 
+		 N
+		W E
+						  +----+
+		 S    +----+      | R0 |    +----+
+			  | R1 |   |---, --+----| R3 |
+			  +-, -+---| ___________,----+                   @patnetwork1 
+	 @kotuby  |________| 
+	
 
-                  *Donna
+				@Donna
 
 The laptop stayed fixed at R0; the capture begins with me leaving R0, walking 
 into and out of R1, walking into and out of R3, and returning to R0 where the 

@@ -30,29 +30,6 @@ def read_lines():
         points.append(b)
     return points
 
-
-# def reduce_lines(points):
-#     info = {}
-#     for p in points:
-#         bssid = b.bssid
-#         bssid_beacons = info.get(bssid) or {}
-#         bssid_beacons_channel = bssid_beacons.get(b.channel) or []
-#         bssid_beacons_channel.append(b)
-#         bssid_beacons[b.channel] = bssid_beacons_channel
-#         info[b.bssid] = bssid_beacons
-
-#     avg_beacons = []
-#     for ssid, network in info.items():
-#         for channel, beacons in network.items():
-#             dbms = [int(b.dbm) for b in beacons if b.dbm != "nil"]
-#             avg_dbm = sum(dbms) / len(dbms)
-#             avg_beacons.append(
-#                 Beacon(beacons[0].bssid, beacons[0].channel, avg_dbm,
-#                        beacons[0].freq, beacons[0].ssid))
-
-#     return avg_beacons
-
-
 # change call in main to output a scatter chart instead
 def make_scatter_chart(points):
     data = [(b.dbm, b.avg) for b in points]

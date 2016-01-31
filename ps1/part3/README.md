@@ -6,8 +6,8 @@ done by nick jones and phaelyn kotuby
 
 ### IDENTIFYING PEOPLE IN A ROOM
 To try to come up with a way to find people in rooms simply with a fixed-spot 
-laptop, I placed my laptop on my bed (~25ft away from the access point, separated 
-by a wall), left my room, and walked around the same floor of my house to see if 
+laptop, I placed my laptop in a room (~25ft away from the access point, separated 
+by a wall), exited, and walked around the same floor of my house to see if 
 the RSSI values of nearby access points would be impaced significantly enough 
 for me to be able to track my progress. First, take a look at the output of 
 listen_all_rooms.lua (the same script from problem 1, run the same way) in the 
@@ -19,8 +19,9 @@ R = room
 W E                +----+
  S     +----+      | R0 |    +----+
        | R1 |   |---, --+----| R3 |
-       +-, -+---| ___________,----+ *patnetwork1   
+       +-, -+---| ___________,----+                   *patnetwork1   
 *kotuby  |________| 
+
 
                   *Donna
 
@@ -32,10 +33,10 @@ In an ideal setting, the access points would be much closer -- Donna and
 patnetwork1 are both in buildings completely separate from mine -- and I 
 would therefore be able to use changes in the dBm of these APs, in conjunction 
 with kotuby's, to triangulate people's locations in relation to the laptop. The 
-higher the dBm, the farther away (or less directly in the line of sight) a person 
-must be. However, as you can tell from the capture, variances in the dBm were 
-miniscule at best -- kotuby's did go down as I approached R1, but there are no 
-real differences as I pass/enter R0 and R3. Other access points are simply too 
+higher the dBm, the farther away from an AP (or less directly in the line of sight)
+a person must be. However, as you can tell from the capture, variances in the dBm
+were miniscule at best -- kotuby's did go down as I approached R1, but there are
+no real differences as I pass/enter R0 and R3. Other access points are simply too 
 far away for me to make a large difference, as they're already passing through 
 several walls and a lot of air. Finally, while I had multiple other SSIDs show 
 up in the capture, I'm not aware of where they are, as I don't manage them, so 

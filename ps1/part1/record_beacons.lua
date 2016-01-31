@@ -8,6 +8,7 @@ local channel_f = Field.new("wlan_radio.channel")
 local dbm_f = Field.new("wlan_radio.signal_dbm")
 local bssid_f = Field.new("wlan.bssid")
 local frequency_f = Field.new("wlan_radio.frequency")
+local subtype_f = Field.new("wlan.fc.subtype")
 
 Point = {}
 
@@ -53,6 +54,10 @@ local function record_beacons()
 		local dbm = dbm_f()
 		local bssid = bssid_f()
 		local frequency = frequency_f()
+
+		if not subtype == 8 then
+			return
+		end
 
 		local p = Point:new(bssid, ssid, dbm, channel, frequency)
 

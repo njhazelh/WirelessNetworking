@@ -40,7 +40,7 @@ def main():
             states[b.bssid] += b.dbm
             states[b.bssid] /= 2.0
         print_states(states)
-        print("--------------------------------------")
+        print("-fingerprint-")
 
 if __name__ == "__main__":
     main()

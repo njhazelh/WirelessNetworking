@@ -14,4 +14,25 @@ function run() {
 	echo "Wifi fingerprint generated in file: fingerprints/$room"
 }
 
-run "$1" "$2"
+
+function run_stdout() {
+	local interface=$1
+
+	tshark -i "$interface" -X lua_script:record_beacons.lua |
+		grep -oE $'[abcdef1234567890:]*\t[[:digit:]]*\t-?[[:digit:]]*$' |
+		./parse_beacons.py
+}
+
+
+function main() {
+	local interface=$1
+	local room=$2
+
+	if [[ -z "$2" ]]; then
+		run_stdout "$interface" 2>/dev/null
+	else
+		run "$interface" "$room"
+	fi
+}
+
+main $@

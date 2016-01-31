@@ -96,6 +96,7 @@ local function packet_rate()
 		-- if a second has passed, restart the average counter
 		if tonumber(time) - start_time >= 1 then 
 			start_time = tonumber(time)
+			packets = 0
 		end
 	end
 end

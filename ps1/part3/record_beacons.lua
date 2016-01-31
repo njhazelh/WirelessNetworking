@@ -8,6 +8,8 @@ local dbm_f = Field.new("wlan_radio.signal_dbm")
 local bssid_f = Field.new("wlan.bssid")
 local subtype_f = Field.new("wlan.fc.subtype")
 
+io.stdout:setvbuf("no")
+
 Point = {}
 
 function Point:new(bssid, dbm, channel)
@@ -35,11 +37,11 @@ function tap.packet(pinfo, tvb, userdata)
 	local subtype = subtype_f()
 
 	if not subtype == 8 then
-		print("not a beacon")
 		return
 	end
 
 	local p = Point:new(bssid, dbm, channel)
 
 	io.stdout:write(tostring(p))
+	io.stdout:flush()
 end

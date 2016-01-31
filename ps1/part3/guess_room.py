@@ -4,7 +4,10 @@ import glob
 from os.path import basename
 import fileinput
 from sklearn.linear_model import Perceptron
+from sklearn.cross_validation import train_test_split
 import subprocess as sp
+import numpy as np
+import sys
 
 
 def get_rooms():
@@ -42,7 +45,7 @@ def generate_datapoint(access_points, ap_indexes):
         if ap not in ap_indexes:
             continue
         ap_index = ap_indexes[ap]
-        dp[ap_index] = int(float(rssi))
+        dp[ap_index] = float(rssi)
     return dp
 
 
@@ -71,12 +74,17 @@ def generate_training_data(ap_indexes):
 def train_model(data, rooms):
     # each item in data is a ([rssi for each ap at ap_index], room_name)
     model = Perceptron()
-    model.fit(data, rooms)
+    data = np.array(data)
+    x_train, x_test, y_train, y_test = train_test_split(data, rooms)
+    model.fit(x_train, y_train)
+    y_pred = model.predict(x_test)
+    print("accuracy:", (1 - np.mean(y_pred == y_test)) * 100, "%")
     return model
 
 
 def run_predictor(model, ap_indexes):
     access_points = []
+    count = 0
     with sp.Popen(["./run_fingerprint.bash", "wlp3s0"],
                   stdout=sp.PIPE) as proc:
         while True:
@@ -84,7 +92,8 @@ def run_predictor(model, ap_indexes):
             if line == "-fingerprint-":
                 datapoint = generate_datapoint(access_points, ap_indexes)
                 room = model.predict([datapoint])
-                print(room)
+                sys.stdout.write("%s %d\r" % (room[0], count))
+                count += 1
                 access_points = []
             else:
                 parts = line.split()

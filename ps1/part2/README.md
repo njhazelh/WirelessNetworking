@@ -27,7 +27,7 @@ at each point, the dBm values stayed constant for the time I took to check the
 distance, so only one dBm value per marking was put in the Excel file. 
 
 Variances between signal strength in individual csv's and the LoS data can likely 
-be chalked up to interference of some kind -- about an hour passed between when 
+be chalked up to interference of some kind -- several hours passe between when 
 I made the two sets of observations, people having entered the house and turned 
 on electronics in the meantime, which accounts for the (rather uniformly-) lower 
 dBm values in the data used for the histograms. 

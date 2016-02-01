@@ -140,7 +140,7 @@ def train_model(data, rooms):
     # Check the accuracy of the model.
     model.fit(x_train, y_train)
     y_pred = model.predict(x_test)
-    print("Accuracy:", 1 - np.mean(y_pred == y_test))
+    print("Accuracy:", np.mean(y_pred == y_test) * 100, "%")
     return model
 
 
@@ -159,13 +159,15 @@ def run_predictor(model, ap_indexes, interface):
     """
     access_points = []
     count = 0
+    print("Starting guesser")
     with sp.Popen(["./run_fingerprint.bash", interface],
-                  stdout=sp.PIPE) as proc:
+                  stdout=sp.PIPE, stderr=sp.DEVNULL) as proc:
         while True:
             line = proc.stdout.readline().decode().strip()
             if line == "-fingerprint-":
                 datapoint = generate_datapoint(access_points, ap_indexes)
                 room = model.predict([datapoint])
+                sys.stdout.write("                       \r")
                 sys.stdout.write("%s %d\r" % (room[0], count))
                 count += 1
                 access_points = []
@@ -220,4 +222,9 @@ if __name__ == "__main__":
     parser.add_argument("interface",
                         help="A wireless interface in monitor mode")
     args = parser.parse_args()
-    main(args)
+    try:
+        main(args)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        pass

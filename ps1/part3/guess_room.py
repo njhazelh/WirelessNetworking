@@ -8,6 +8,7 @@ from sklearn.cross_validation import train_test_split
 import subprocess as sp
 import numpy as np
 import sys
+import argparse
 
 """
 This script uses a Perceptron classifier to identify rooms by the strength of
@@ -143,7 +144,7 @@ def train_model(data, rooms):
     return model
 
 
-def run_predictor(model, ap_indexes):
+def run_predictor(model, ap_indexes, interface):
     """
         Use the trained model to guess which room the computer is currently in.
         Runs in a stream that never ends.
@@ -152,11 +153,13 @@ def run_predictor(model, ap_indexes):
         :param ap_indexes: The access point indexes, so when we see an access
             point, we can map it to the right variable in our query to the
             model.
+        :param interface: The name of a wireless interface that is in monitor
+            mode.
         :returns: Never returns.  Runs in an infinite loop until you kill it.
     """
     access_points = []
     count = 0
-    with sp.Popen(["./run_fingerprint.bash", "wlp3s0"],
+    with sp.Popen(["./run_fingerprint.bash", interface],
                   stdout=sp.PIPE) as proc:
         while True:
             line = proc.stdout.readline().decode().strip()
@@ -174,7 +177,7 @@ def run_predictor(model, ap_indexes):
                 access_points.append(parts)
 
 
-def main():
+def main(args):
     """
         The entry point for the guesser.
     """
@@ -209,8 +212,12 @@ def main():
     print("Finished training model")
 
     # run run_fingerprint and guess the correct room.
-    run_predictor(model, ap_indexes)
+    run_predictor(model, ap_indexes, args.interface)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("interface",
+                        help="A wireless interface in monitor mode")
+    args = parser.parse_args()
+    main(args)

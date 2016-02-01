@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python3.4
 
 import matplotlib.pyplot as plt
 import sys
@@ -58,7 +58,7 @@ def make_chart(info):
     plt.title("2.4Ghz Access Points")
     plt.xlabel("Channel Number")
     plt.ylabel("Dbm")
-    plt.rc('font', family='arial', weight='normal', size=8)
+    plt.rc('font', size=8)
     labels = [b.ssid for b in info]
     plt.subplots_adjust(bottom=0.1)
     plt.scatter(
@@ -72,7 +72,7 @@ def make_chart(info):
 def main():
     beacons = read_lines()
     info = reduce_lines(beacons)
-    chart = make_chart(info)
+    make_chart(info)
 
 
 if __name__ == "__main__":

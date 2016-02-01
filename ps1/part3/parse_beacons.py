@@ -1,5 +1,15 @@
 #! /bin/env python3
 
+"""
+This script is used to parse the output from the lua script in tshark.  The
+benefit of this is that we can filter out any unexpected output from tshark
+and we can combine the information over time.  This could have been done in
+lua, but python is a much nicer language.
+
+:author: Nick Jones
+:date: 1/31/2016
+"""
+
 from collections import defaultdict, namedtuple
 import fileinput
 from datetime import datetime, timedelta
@@ -11,7 +21,6 @@ Beacon = namedtuple("Beacon", "bssid dbm")
 def split_line(line):
     parts = line.strip().split("\t")
     if len(parts) != 2 or "" in parts or "nil" in parts:
-        # print("malformed line '%s'" % (line))
         return None
     return Beacon(bssid=parts[0], dbm=int(parts[1]))
 
@@ -24,9 +33,18 @@ def print_states(states):
 
 
 def main():
-    states = defaultdict(int)
-    int_start = datetime.now()
-    int_states = defaultdict(int)
+    """
+    The way this works is by keeping a view of the world and a view
+    within an interval.  If multiple beacons from a single AP are
+    seen within the interval they are combined using a weighted average.
+    If an access point does not appear in the interval, but we expected it,
+    it gets penalized harshly.  APs that fall below -10dbm are removed from
+    the view of the world.  At the end of each interval, the view of the
+    world is written to stdout.
+    """
+    states = defaultdict(int)  # view of world over multiple states
+    int_start = datetime.now()  # datetime of interval start
+    int_states = defaultdict(int)  # states seen in interval
     for line in fileinput.input():
         b = split_line(line)
         if b is None:

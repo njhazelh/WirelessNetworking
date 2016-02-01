@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# This function is used for generating a fingerprint of a room.
+# It runs tshark for 10 minutes to generate datapoints from the lua script.
+# These datapoints are written to the fingerprints directory within this
+# folder.  If the folder doesn't exist, it should be created.
+#
+# -Y "http" is useful because it kills the output from tshark, so we can avoid
+# using grep too much.
 function run() {
 	local interface=$1
 	local room=$2
@@ -17,6 +24,9 @@ function run() {
 }
 
 
+# This function is mostly used for debugging.
+# -Y "http" is useful because it kills the output from tshark, so we can avoid
+# using grep too much.
 function run_stdout() {
 	local interface=$1
 
@@ -26,7 +36,13 @@ function run_stdout() {
 		./parse_beacons.py
 }
 
-
+# The first argument of this script is the wireless interface to listen on.
+# This interface should already be in monitor mode, and cycling through wifi
+# channels. See scripts in the project root for guidance in setting this up.
+#
+# The second argument is the name of the room to fingerprint.  This argument
+# is optional, but if it is ommited, the script will not generate a fingerprint
+# file. Instead, it will write to stdout.
 function main() {
 	local interface=$1
 	local room=$2

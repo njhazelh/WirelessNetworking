@@ -5,10 +5,9 @@
 function cycle() {
     local interface=$1
     local channel=$2
-    echo -en "\rrunning on channel $channel "
+    echo -en "running on channel $channel\r"
     iwconfig "$interface" channel "$channel" >/dev/null
-    sleep 0.05 # 50ms
-    wait "$pid" 2>/dev/null
+    sleep 0.1 # 100ms
 }
 
 function main() {

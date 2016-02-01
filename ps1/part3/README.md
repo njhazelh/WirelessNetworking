@@ -38,8 +38,8 @@ moved from room to room, the data successfully updated in a consistent and
 stable manner.
 
 ### Running the room identifier
-To run this code, you must install scikit-learn, wireshark 2, lua 5.2, and
-python3.
+To run this code, you must install scikit-learn, numpy, wireshark 2, lua 5.2,
+and python3.
 
 First start a wireless access point in monitor mode.  See `start_monitor.bash`
 in the project root or use something like airmon-ng or kismet.  If you are

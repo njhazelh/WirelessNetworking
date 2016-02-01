@@ -8,6 +8,8 @@ are a picture of a chart generated, a screenshot of wireshark with beacon
 packets displaying, and a csv of packets stored from the script.
 
 ## Running
+To run this code, you must have matplotlib, wireshark 2, lua 5.2 and python3.
+
 To run the code, first put your wireless card into monitor mode.  If you are
 on linux, the start_monitor.bash script in the project root, should help you
 do this.

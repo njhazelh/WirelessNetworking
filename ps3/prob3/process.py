@@ -38,6 +38,7 @@ def main():
 	BER = errors / TIME_RUN
 	print "Bits per second:" + str(BPS)
 	print "Bit errors per second: " + str(BER)
+	print "Bit error ratio: " + str(errors) + "/" + str(len(f1))
 
 if __name__ == "__main__":
 	main()

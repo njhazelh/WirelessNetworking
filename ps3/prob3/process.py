@@ -2,8 +2,8 @@
 import scipy
 import numpy
 
-FILE1 = "QPSK_in"
-FILE2 = "QPSK_out"
+FILE1 = "BPSK_in"
+FILE2 = "BPSK_out"
 # to include a progress indicator
 NUM_SPLITS = 10
 
@@ -34,6 +34,7 @@ def main():
 	print "...done!"	
 	
 	print "total bits: " + str(num_bits)
+	print "errors: " + str(errors)
 	print "bit error ratio: " + str(errors) + "/" + str(num_bits) + " = " + str(errors/float(num_bits))
 
 if __name__ == "__main__":

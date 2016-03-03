@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Psk Test
-# Generated: Tue Mar  1 18:25:47 2016
+# Generated: Wed Mar  2 23:12:08 2016
 ##################################################
 
 from PyQt4 import Qt
@@ -80,12 +80,12 @@ class psk_test(gr.top_block, Qt.QWidget):
         self.digital_constellation_decoder_cb_0 = digital.constellation_decoder_cb(my_constellation)
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc((0, 1, 2, 3), 1)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate)
-        self.blocks_head_0_0 = blocks.head(gr.sizeof_gr_complex*1, 200000)
-        self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, 200000)
+        self.blocks_head_0_0 = blocks.head(gr.sizeof_gr_complex*1, 2000000)
+        self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, 2000000)
         self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_gr_complex*1, "QPSK_in", False)
-        self.blocks_file_sink_0_0.set_unbuffered(False)
+        self.blocks_file_sink_0_0.set_unbuffered(True)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, "QPSK_out", False)
-        self.blocks_file_sink_0.set_unbuffered(False)
+        self.blocks_file_sink_0.set_unbuffered(True)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         self.blks2_error_rate_0 = grc_blks2.error_rate(
         	type='BER',

@@ -30,7 +30,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 8)</value>
+      <value>(24, 35)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -152,7 +152,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 115)</value>
+      <value>(24, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -164,7 +164,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>48.5e3</value>
+      <value>48e3</value>
     </param>
   </block>
   <block>
@@ -191,7 +191,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(968, 147)</value>
+      <value>(776, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -207,7 +207,7 @@
     </param>
     <param>
       <key>ok_to_block</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>samp_rate</key>
@@ -234,7 +234,7 @@
     </param>
     <param>
       <key>file</key>
-      <value>/home/njhazelh/radio_samples</value>
+      <value>radio_samples</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -289,7 +289,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(432, 243)</value>
+      <value>(368, 243)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -352,7 +352,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(968, 291)</value>
+      <value>(776, 307)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -391,7 +391,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(632, 235)</value>
+      <value>(552, 235)</value>
     </param>
     <param>
       <key>_rotation</key>

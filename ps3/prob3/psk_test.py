@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Psk Test
-# Generated: Fri Mar  4 12:04:38 2016
+# Generated: Fri Mar  4 12:31:51 2016
 ##################################################
 
 from PyQt4 import Qt
@@ -50,7 +50,7 @@ class psk_test(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 1e6
-        self.my_constellation = my_constellation = digital.constellation_calcdist((complex(0, 0), complex(0, 1), complex(1, 0), complex(1, 1)), (00, 01, 10, 11), 2, 2).base()
+        self.my_constellation = my_constellation = digital.constellation_calcdist((complex(0, 0), complex(0, 1), complex(1, 0), complex(1, 1)), (00, 01, 10, 11), 2, 1).base()
 
         ##################################################
         # Blocks
@@ -107,10 +107,10 @@ class psk_test(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_head_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.blocks_head_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.analog_random_source_x_0, 0), (self.blks2_error_rate_0, 0))
-        self.connect((self.digital_constellation_decoder_cb_0, 0), (self.blocks_head_0, 0))
         self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.blocks_add_xx_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_head_0_0, 0))
+        self.connect((self.digital_constellation_decoder_cb_0, 0), (self.blocks_head_0, 0))
 
 
 # QT sink close method reimplementation

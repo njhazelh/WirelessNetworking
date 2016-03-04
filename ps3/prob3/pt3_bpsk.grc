@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Thu Mar  3 13:57:50 2016</timestamp>
+  <timestamp>Fri Mar  4 00:14:34 2016</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -738,7 +738,7 @@
     </param>
     <param>
       <key>amp</key>
-      <value>0.5</value>
+      <value>20</value>
     </param>
     <param>
       <key>seed</key>

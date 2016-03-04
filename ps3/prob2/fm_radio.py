@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
-# Title: Top Block
-# Generated: Fri Mar  4 16:17:20 2016
+# Title: Fm Radio
+# Generated: Fri Mar  4 17:55:54 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -35,10 +35,10 @@ import time
 import wx
 
 
-class top_block(grc_wxgui.top_block_gui):
+class fm_radio(grc_wxgui.top_block_gui):
 
     def __init__(self):
-        grc_wxgui.top_block_gui.__init__(self, title="Top Block")
+        grc_wxgui.top_block_gui.__init__(self, title="Fm Radio")
 
         ##################################################
         # Variables
@@ -205,9 +205,9 @@ class top_block(grc_wxgui.top_block_gui):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.wxgui_fftsink2_0_0.set_sample_rate(self.samp_rate)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 75e3, 25e3, firdes.WIN_HAMMING, 6.76))
         self.osmosdr_source_0.set_sample_rate(self.samp_rate)
+        self.wxgui_fftsink2_0_0.set_sample_rate(self.samp_rate)
 
     def get_channel_width(self):
         return self.channel_width
@@ -230,8 +230,8 @@ class top_block(grc_wxgui.top_block_gui):
     def set_center_freq(self, center_freq):
         self.center_freq = center_freq
         self.analog_sig_source_x_0.set_frequency(self.center_freq - self.channel_freq)
-        self.wxgui_fftsink2_0_0.set_baseband_freq(self.center_freq)
         self.osmosdr_source_0.set_center_freq(self.center_freq, 0)
+        self.wxgui_fftsink2_0_0.set_baseband_freq(self.center_freq)
 
     def get_audio_gain(self):
         return self.audio_gain
@@ -243,7 +243,7 @@ class top_block(grc_wxgui.top_block_gui):
         self.blocks_multiply_const_vxx_0.set_k((self.audio_gain, ))
 
 
-def main(top_block_cls=top_block, options=None):
+def main(top_block_cls=fm_radio, options=None):
 
     tb = top_block_cls()
     tb.Start(True)

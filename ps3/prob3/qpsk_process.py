@@ -2,8 +2,8 @@
 import scipy
 import numpy
 
-FILE1 = "BPSK_in"
-FILE2 = "BPSK_out"
+FILE1 = "QPSK_in"
+FILE2 = "QPSK_out"
 # to include a progress indicator
 NUM_SPLITS = 10
 
@@ -13,10 +13,15 @@ def main():
 	# open with each bit as an element in a numpy array
 	f1 = numpy.unpackbits(scipy.fromfile(open(FILE1), dtype="uint8"))
 	f2 = numpy.unpackbits(scipy.fromfile(open(FILE2), dtype="uint8"))
+	f1 = scipy.fromfile(open(FILE1), dtype="uint8")
+	f2 = scipy.fromfile(open(FILE2), dtype="uint8")
+
+	print f1[:100]
+	print f2[:100]
 
 	num_bits = len(f1)
 
-# split these into a few arrays so that we can print a progress indicator 
+	# split these into a few arrays so that we can print a progress indicator 
 	print "splitting arrays..."
 	inputs = numpy.array_split(f1, NUM_SPLITS)
 	outputs = numpy.array_split(f2, NUM_SPLITS)	

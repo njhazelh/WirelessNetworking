@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Psk Test
-# Generated: Fri Mar  4 12:31:51 2016
+# Generated: Fri Mar  4 13:10:57 2016
 ##################################################
 
 from PyQt4 import Qt
@@ -98,7 +98,6 @@ class psk_test(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.analog_random_source_x_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.blks2_error_rate_0, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.qtgui_const_sink_x_0, 0))
@@ -107,10 +106,11 @@ class psk_test(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_head_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.blocks_head_0_0, 0), (self.blocks_file_sink_0_0, 0))
         self.connect((self.analog_random_source_x_0, 0), (self.blks2_error_rate_0, 0))
-        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.blocks_add_xx_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_head_0_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.blocks_head_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.blocks_add_xx_0, 0))
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 1))
 
 
 # QT sink close method reimplementation

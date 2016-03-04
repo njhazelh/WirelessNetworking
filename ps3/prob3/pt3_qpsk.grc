@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Fri Mar  4 12:31:21 2016</timestamp>
+  <timestamp>Fri Mar  4 13:10:57 2016</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -270,53 +270,6 @@
     <param>
       <key>_coordinate</key>
       <value>(409, 372)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>analog_noise_source_x</key>
-    <param>
-      <key>id</key>
-      <value>analog_noise_source_x_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>noise_type</key>
-      <value>analog.GR_GAUSSIAN</value>
-    </param>
-    <param>
-      <key>amp</key>
-      <value>0.1</value>
-    </param>
-    <param>
-      <key>seed</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(201, 262)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -668,6 +621,53 @@
     </param>
   </block>
   <block>
+    <key>variable_constellation</key>
+    <param>
+      <key>id</key>
+      <value>my_constellation</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"ok"</value>
+    </param>
+    <param>
+      <key>sym_map</key>
+      <value>00, 01, 10, 11</value>
+    </param>
+    <param>
+      <key>const_points</key>
+      <value>complex(0, 0), complex(0, 1), complex(1, 0), complex(1, 1)</value>
+    </param>
+    <param>
+      <key>rot_sym</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>dims</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>precision</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>soft_dec_lut</key>
+      <value>None</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(281, 13)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_chunks_to_symbols_xx</key>
     <param>
       <key>id</key>
@@ -719,58 +719,52 @@
     </param>
   </block>
   <block>
-    <key>variable_constellation</key>
+    <key>analog_noise_source_x</key>
     <param>
       <key>id</key>
-      <value>my_constellation</value>
+      <value>analog_noise_source_x_0</value>
     </param>
     <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
-      <key>value</key>
-      <value>"ok"</value>
+      <key>type</key>
+      <value>complex</value>
     </param>
     <param>
-      <key>sym_map</key>
-      <value>00, 01, 10, 11</value>
+      <key>noise_type</key>
+      <value>analog.GR_GAUSSIAN</value>
     </param>
     <param>
-      <key>const_points</key>
-      <value>complex(0, 0), complex(0, 1), complex(1, 0), complex(1, 1)</value>
+      <key>amp</key>
+      <value>0.1</value>
     </param>
     <param>
-      <key>rot_sym</key>
-      <value>2</value>
+      <key>seed</key>
+      <value>0</value>
     </param>
     <param>
-      <key>dims</key>
-      <value>1</value>
+      <key>affinity</key>
+      <value></value>
     </param>
     <param>
-      <key>precision</key>
-      <value>8</value>
+      <key>minoutbuf</key>
+      <value>0</value>
     </param>
     <param>
-      <key>soft_dec_lut</key>
-      <value>None</value>
+      <key>maxoutbuf</key>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(281, 13)</value>
+      <value>(200, 261)</value>
     </param>
     <param>
       <key>_rotation</key>
       <value>0</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>analog_noise_source_x_0</source_block_id>
-    <sink_block_id>blocks_add_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>1</sink_key>
-  </connection>
   <connection>
     <source_block_id>analog_random_source_x_0</source_block_id>
     <sink_block_id>blocks_throttle_0</sink_block_id>
@@ -820,18 +814,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>digital_chunks_to_symbols_xx_0</source_block_id>
-    <sink_block_id>blocks_add_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>digital_chunks_to_symbols_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
     <sink_block_id>blocks_head_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -842,5 +824,23 @@
     <sink_block_id>blocks_head_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_throttle_0</source_block_id>
+    <sink_block_id>digital_chunks_to_symbols_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>digital_chunks_to_symbols_xx_0</source_block_id>
+    <sink_block_id>blocks_add_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_noise_source_x_0</source_block_id>
+    <sink_block_id>blocks_add_xx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>1</sink_key>
   </connection>
 </flow_graph>

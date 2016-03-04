@@ -13,8 +13,6 @@ def main():
 	# open with each bit as an element in a numpy array
 	f1 = numpy.unpackbits(scipy.fromfile(open(FILE1), dtype="uint8"))
 	f2 = numpy.unpackbits(scipy.fromfile(open(FILE2), dtype="uint8"))
-	f1 = scipy.fromfile(open(FILE1), dtype="uint8")
-	f2 = scipy.fromfile(open(FILE2), dtype="uint8")
 
 	print f1[:100]
 	print f2[:100]

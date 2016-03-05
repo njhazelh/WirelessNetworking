@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Pskrx
-# Generated: Fri Mar  4 17:58:32 2016
+# Generated: Fri Mar  4 19:18:50 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -63,7 +63,6 @@ class pskrx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.sps = sps = 2
-        self.serno = serno = "235e484b"
         self.samp_rate = samp_rate = 1e6
         self.freq = freq = 2.4e9
         self.constel = constel = digital.constellation_calcdist(([-1, 1]), ([0, 1]), 2, 1).base()
@@ -130,7 +129,7 @@ class pskrx(gr.top_block, Qt.QWidget):
         
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
-        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + serno )
+        self.osmosdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + "" )
         self.osmosdr_source_0.set_sample_rate(samp_rate)
         self.osmosdr_source_0.set_center_freq(freq, 0)
         self.osmosdr_source_0.set_freq_corr(0, 0)
@@ -150,7 +149,7 @@ class pskrx(gr.top_block, Qt.QWidget):
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(constel.bits_per_symbol())
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_int*1)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "prob4_rx_output", False)
-        self.blocks_file_sink_0.set_unbuffered(False)
+        self.blocks_file_sink_0.set_unbuffered(True)
         self.blks2_packet_decoder_0 = grc_blks2.packet_demod_b(grc_blks2.packet_decoder(
         		access_code="",
         		threshold=-1,
@@ -189,12 +188,6 @@ class pskrx(gr.top_block, Qt.QWidget):
     def set_sps(self, sps):
         self.sps = sps
         self.digital_pfb_clock_sync_xxx_0.update_taps((filter.firdes.root_raised_cosine(32, 32 * self.sps, 1.0, 0.35, 11 * 32 * self.sps)))
-
-    def get_serno(self):
-        return self.serno
-
-    def set_serno(self, serno):
-        self.serno = serno
 
     def get_samp_rate(self):
         return self.samp_rate

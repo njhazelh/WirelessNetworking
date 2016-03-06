@@ -45,7 +45,19 @@ seem to work when we tried.
 
 
 ## Problem 3: BPSK/QPSK Transmission Simulation
-...
+Problem 3 involved creating flowgraphs to represent BPSK and QPSK modulators
+and demodulators. Additionally, we needed to write Python scripts to read 
+gnuradio file outputs and determine bit error ratios between two files. 
+
+BSPK was relatively straightforward to encode by following the instructions;
+changing the flowgraph to accomodate QPSK required some better understanding
+of gnuradio and how to use the constellation object. Ultimately, though, the 
+differences between the two flowgraphs were minor. In addition, the python
+scripts to process them are essentially the same -- they just use different
+file parameters and were split so that the two encodings could be analyzed
+more quickly. Calculating the BER was as simple as reading in the files for
+pre- and post-modulated bits, putting them into arrays of binary, and then
+checking the number of differences between the two.
 
 ## Problem 4: Real Transmission using HackRF
 Problem 4 involved creating a wireless transmitter and receiver and using

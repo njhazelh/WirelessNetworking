@@ -512,7 +512,7 @@
     </param>
     <param>
       <key>delay</key>
-      <value>480000 * sec_delay</value>
+      <value>int(480000 * sec_delay)</value>
     </param>
     <param>
       <key>_enabled</key>

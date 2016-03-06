@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Fm Radio
-# Generated: Fri Mar  4 17:55:54 2016
+# Generated: Sun Mar  6 17:23:55 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -165,7 +165,7 @@ class fm_radio(grc_wxgui.top_block_gui):
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((audio_gain, ))
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, "radio_samples", False)
         self.blocks_file_sink_0.set_unbuffered(False)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, 480000 * sec_delay)
+        self.blocks_delay_0 = blocks.delay(gr.sizeof_gr_complex*1, int(480000 * sec_delay))
         self.audio_sink_0 = audio.sink(48000, "", True)
         self.analog_wfm_rcv_0 = analog.wfm_rcv(
         	quad_rate=480e3,
@@ -197,7 +197,7 @@ class fm_radio(grc_wxgui.top_block_gui):
         self.sec_delay = sec_delay
         self._sec_delay_slider.set_value(self.sec_delay)
         self._sec_delay_text_box.set_value(self.sec_delay)
-        self.blocks_delay_0.set_dly(480000 * self.sec_delay)
+        self.blocks_delay_0.set_dly(int(480000 * self.sec_delay))
 
     def get_samp_rate(self):
         return self.samp_rate

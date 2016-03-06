@@ -74,6 +74,12 @@ more quickly. Calculating the BER was as simple as reading in the files for
 pre- and post-modulated bits, putting them into arrays of binary, and then
 checking the number of differences between the two.
 
+When measured against set signal-to-noise ratios, BPSK generally performed 
+better than QPSK when the SNR was lower; however, the two eventually converged
+and, given higher SNRs, we expect that QPSK would outperform BPSK. Because 
+QPSK transmits 2 bits per symbol, it would have a higher throughput overall
+when put against any amounts of noise. 
+
 ![BPSK vs QPSK](prob3/graph.PNG)
 
 ## Problem 4: Real Transmission using HackRF
